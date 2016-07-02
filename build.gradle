@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+    }
+}
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 'android-15'
+    buildToolsVersion '23.0.2'
+    
+    sourceSets{
+        main.setRoot('app')
+    }
+    signingConfigs {
+        debug {
+            storeFile file("debug.keystore")
+        }
+        release {
+            storeFile file("release.keystore")
+            storePassword "darkgem"
+            keyAlias "release"
+            keyPassword "darkgem"
+        }
+    }
+    buildTypes {
+        debug{
+            //UMENG
+            manifestPlaceholders = [UMENG_APPKEY: "56947a48e0f55a0635002c3a", UMENG_CHANNEL : "IPARK_2_ANDROID"]
+        }
+        release {
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFile 'proguard-project.txt'
+
+            //UMENG
+            manifestPlaceholders = [UMENG_APPKEY: "56947557e0f55ae8c2001aa4", UMENG_CHANNEL : "IPARK_2_ANDROID"]
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        encoding 'UTF-8'
+        sourceCompatibility JavaVersion.VERSION_1_6
+        targetCompatibility JavaVersion.VERSION_1_6
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'app/libs/')
+}

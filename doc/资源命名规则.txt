@@ -1,0 +1,21 @@
+﻿drawable - def_模块_具体的含义
+
+drawable-***pi 模块_具体含义
+
+layout   - activity_模块_具体含义
+           fragment_模块_具体含义
+           item_模块_具体含义
+           
+id       - 类小写_模块_具体含义，如
+			tv_login_main
+			iv_login_avatar
+			注意：类里面指向的变量，和ID一致，不采用驼峰写法
+
+			
+values   - 文件按照 模块类型分
+				app_values.xml -> 当前APP的所有values数据存放
+				action_bar_values.xml -> 所有ActionBar的Values存放
+			其中，所有的元素name都采用 小写 + "_" 命名格式
+
+			
+注意，所有的文件名都采用小写 + "_" 命名格式

@@ -1,0 +1,93 @@
+-optimizationpasses 5
+-dontpreverify
+-allowaccessmodification
+-optimizations !code/simplification/arithmetic,!code/simplification/cast,!field/*,!class/merging/*
+
+#保留的属性
+-keepattributes *Annotation*,Exceptions,InnerClasses,Signature
+
+#保留的基础组件
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+
+#保留JNI声明
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+#保留自定义View
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public void set*(...);
+	*** get*();
+}
+
+#保留自定义控件初始化函数
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+#保留自定义控件初始化函数
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+#保留XML直接onClick类型, 以及菜单
+-keepclassmembers class * extends android.content.Context {
+   public void *(android.view.View);
+   public void *(android.view.MenuItem);
+}
+
+#保留Parcelable构造函数
+-keepclassmembers class * implements android.os.Parcelable {
+    static ** CREATOR;
+}
+
+#保留R文件
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
+
+#保留枚举类型
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+
+#第三方JAR
+
+#sql cipher
+-keep class net.sqlcipher.** {*;}
+
+#android v4 support
+-keep class android.support.v4.** {*;}
+-dontwarn android.support.v4.**
+
+#uil imageloader
+-keep com.nostra13.universalimageloader.** {*;}
+
+#Eventbus
+-keep class de.greenrobot.event.** {*;}
+-keepclassmembers class ** {
+    public void onEvent*(**);
+}
+
+#fastjson
+-keep class com.alibaba.fastjson.** {*;}
+
+#OkHttp
+-keep class okhttp3.** { *;}
+-dontwarn okhttp3.**
+-keep class okio.** {*;}
+-dontwarn okio.**
+
+#UMENG
+-keep class com.umeng.analytics.** {*;}
+-keep class u.aly.** {*;}
+-dontwarn u.aly.**
